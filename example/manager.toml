@@ -1,0 +1,28 @@
+[settings]
+# this path is relative to your $HOME
+dotfiles_dir = "C/sween/example"
+
+[cfg]
+[cfg.neovim]
+source = "neovim"
+target = ".config/neovim" #you can write paths like this
+hook   = "neovim/some_script.sh"
+
+[cfg.scripts]
+source = "scripts"
+target = "~/.local/bin/scripts" #or like this
+hook   = "echo \"$HOME, $USER. Env vars are also works!\""
+
+# you can have cfg with a different name than source, 
+# but you must specify the ! name ! in the arguments!
+# --------
+#        |
+#        V  this is name
+[cfg.etc_config]
+source = "some_etc_config" 
+target = "/etc/etc_config" #or even like this
+# hooks are optional
+
+#do not forget that if you link one file, not a directory, 
+#then in the target you must specify the name of this file
+#as in the example above.
