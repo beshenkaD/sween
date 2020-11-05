@@ -51,7 +51,9 @@ func getCanonicalPath(path string, isTarget bool) string {
 			path = dir
 		} else if strings.HasPrefix(path, "~/") {
 			path = filepath.Join(dir, path[2:])
-		}
+		} else {
+            path = " "
+        }
 	} else {
         wd, err := os.Getwd()
 
