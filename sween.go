@@ -37,6 +37,10 @@ func getCanonicalPath(path string, isTarget bool) string {
 	// TODO:
 	// Add doas support
 
+    if path == "" {
+        return ""
+    }
+
 	if usr.Name == "root" {
 		sudoer := os.Getenv("SUDO_USER")
 		if sudoer != "" {
@@ -51,8 +55,6 @@ func getCanonicalPath(path string, isTarget bool) string {
 			path = dir
 		} else if strings.HasPrefix(path, "~/") {
 			path = filepath.Join(dir, path[2:])
-		} else {
-            path = " "
         }
 	} else {
         wd, err := os.Getwd()
