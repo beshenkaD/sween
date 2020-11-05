@@ -1,28 +1,67 @@
-[settings]
-# this path is relative to your $HOME
-dotfiles_dir = "C/sween/example"
+# Profiles are convenient for grouping dotfiles
+[profiles]
 
-[cfg]
-[cfg.neovim]
-source = "neovim"
-target = ".config/neovim" #you can write paths like this
-hook   = "neovim/some_script.sh"
+# Dotfiles that are needed in any environment
+[profiles.main]
+	dotfiles = [ "vim", "fish", "neofetch" ]
 
-[cfg.scripts]
-source = "scripts"
-target = "~/.local/bin/scripts" #or like this
-hook   = "echo \"$HOME, $USER. Env vars are also works!\""
+# Only sway related
+[profiles.sway]
+    dotfiles = [ "sway", "waybar", "wayland" ]
 
-# you can have cfg with a different name than source, 
-# but you must specify the ! name ! in the arguments!
-# --------
-#        |
-#        V  this is name
-[cfg.etc_config]
-source = "some_etc_config" 
-target = "/etc/etc_config" #or even like this
-# hooks are optional
+# Only bspwm related
+[profiles.bspwm]
+    dotfiles = [ "bspwm", "sxhkd" ]    
 
-#do not forget that if you link one file, not a directory, 
-#then in the target you must specify the name of this file
-#as in the example above.
+# You can install multiple profiles like this:
+# sween --link --profiles "main sway"
+
+[dotfiles]
+[dotfiles.vim]
+    # sources are relative to your dotfile directory
+	source = "vim"
+	target = "~/.vimrc" #you can write paths like this
+	hooks  = [ "echo 'export EDITOR=vim' >> ~/.bashrc" ]
+
+# You can run sween as root
+# if you use sudo then your user will be automatically found
+# if you use 'su -c' this also works because then the variable '$USER' does not change
+# but if you are using doas then you must export a SUDO_USER environment variable
+# Example:
+# export SUDO_USER="joe" doas sween --link --dotfiles "etc_config fish"
+[dotfiles.etc_config]
+    source = "some_etc_config" 
+    target = "/etc/etc_config" #or like this
+
+[dotfiles.neofetch]
+    source = "neofetch"
+    target = "~/.config/neofetch1"
+    # hooks are optional
+
+[dotfiles.wayland]
+    # source and target are also optional
+    hooks  = [ "echo 'set MOZ_ENABLE_WAYLAND 1'       >> ~/.config/fish/config.fish",
+               "echo 'set QT_QPA_PLATFORM    wayland' >> ~/.config/fish/config.fish",
+               "echo 'set GDK_BACKEND        wayland' >> ~/.config/fish/config.fish",
+               "echo 'set XDG_SESSION_TYPE   wayland' >> ~/.config/fish/config.fish" ]
+
+[dotfiles.sway]
+    source = "sway"
+    target = "~/.config/sway1"
+
+[dotfiles.waybar]
+    source = "waybar"
+    target = "~/.config/waybar"
+
+[dotfiles.fish]
+    source = "fish"
+    target = "~/.config/fish1"
+    hooks  = [ "echo '[ -x /bin/fish ] && SHELL=/bin/fish exec /bin/fish' >> ~/.bashrc" ]
+
+[dotfiles.bspwm]
+    source = "bspwm"
+    target = "~/.config/bspwm"
+
+[dotfiles.sxhkd]
+    source = "sxhkd"
+    target = "~/.config/sxhkd"

@@ -2,12 +2,12 @@
 
 ## Why?
 because I can.
-And also no one has ever written a dotfile manager in pure C99 before me.
 
 ## Installation
 ```shell script
-make release
-make install #You can specify prefix via PREFIX=
+git clone https://github.com/beshenkaD/sween
+cd sween
+go install
 ```
 ## Getting started
 **1. Setup :**
