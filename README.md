@@ -1,27 +1,30 @@
-# Sween
+Sween
+=====
+Convenient dotfile manager with toml configuration.
 
-## Why?
-because I can.
-
-## Installation
+# Installation
 ```shell script
-git clone https://github.com/beshenkaD/sween
-cd sween
-go install
+go get github.com/beshenkaD/sween
 ```
-## Getting started
-**1. Setup :**
+# Getting started
+**1. Setup:**
 ``` shell script
-git clone https://github.com/my_org/dotfiles
-cd my_dotfiles && touch manager.toml
+git clone https://github.com/myOrg/dotfiles
+cd myDotfiles && touch manager.toml
 ```
-
-OR if you want to create a new dotfile directory
+Or if you want to create a new dotfile directory
 ```shell script
 sween --init dotfiles
 ```
-**2. Configuration :**
+**2. Configuration and usage:**
 Take a look at the [example](example).
+
+# Limitations
+Unfortunately, if you use `doas` or `su -c`, then you need to export the environment variable SUDO_USER if you are going to install files in the '/home/$USER' and in the '/' at the same time.
+**Example**
+```shell script
+env SUDO_USER=$USER su -c 'sween --link --profiles "homeDotfiles rootDotfiles"'
+```
 
 ## License
 All the code in this repository is released under the GPL License. Take a look
