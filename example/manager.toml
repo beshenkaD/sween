@@ -25,17 +25,17 @@
 
 # You can run sween as root
 # if you use sudo then your user will be automatically found
-# if you use 'su -c' this also works because then the variable '$USER' does not change
-# but if you are using doas then you must export a SUDO_USER environment variable
+# if you use 'su -c' or doas then you must export a SUDO_USER environment variable
 # Example:
-# export SUDO_USER="joe" doas sween --link --dotfiles "etc_config fish"
+# env SUDO_USER=$USER doas sween --link --dotfiles "etc_config fish"
+
 [dotfiles.etc_config]
     source = "some_etc_config" 
     target = "/etc/etc_config" #or like this
 
 [dotfiles.neofetch]
     source = "neofetch"
-    target = "~/.config/neofetch1"
+    target = "~/.config/neofetch"
     # hooks are optional
 
 [dotfiles.wayland]
@@ -47,7 +47,7 @@
 
 [dotfiles.sway]
     source = "sway"
-    target = "~/.config/sway1"
+    target = "~/.config/sway"
 
 [dotfiles.waybar]
     source = "waybar"
@@ -55,7 +55,7 @@
 
 [dotfiles.fish]
     source = "fish"
-    target = "~/.config/fish1"
+    target = "~/.config/fish"
     hooks  = [ "echo '[ -x /bin/fish ] && SHELL=/bin/fish exec /bin/fish' >> ~/.bashrc" ]
 
 [dotfiles.bspwm]

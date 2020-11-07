@@ -35,7 +35,7 @@ func getCanonicalPath(path string, isTarget bool) string {
 
 	// This works fine with sudo and su -c
 	// TODO:
-	// Add doas support
+	// Add doas and su -c support
 
     if path == "" {
         return ""
@@ -44,7 +44,7 @@ func getCanonicalPath(path string, isTarget bool) string {
 	if usr.Name == "root" {
 		sudoer := os.Getenv("SUDO_USER")
 		if sudoer != "" {
-			usr.HomeDir = filepath.Join("home", sudoer)
+			usr.HomeDir = filepath.Join("/home", sudoer)
 		}
 	}
 
@@ -72,6 +72,9 @@ func getCanonicalPath(path string, isTarget bool) string {
 func dotfileOperation(dotfile Dotfile, operation string) {
 	source := getCanonicalPath(dotfile.Source, false)
 	target := getCanonicalPath(dotfile.Target, true)
+
+    println(source)
+    println(target)
 
 	if source == "" && target == "" && len(dotfile.Hooks) == 0 {
 		fmt.Println(Sprintf(White("%s dotfile is not valid. Source, target and hooks are missed"), Red("ERROR:")))
