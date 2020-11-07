@@ -153,7 +153,7 @@ func initDotfilesDir(name string) {
 	fmt.Fprintf(file, "[dotfiles.vim]\n")
 	fmt.Fprintf(file, "\tsource = \"vim\"\n")
 	fmt.Fprintf(file, "\ttarget = \"~/.vimrc\"\n")
-	fmt.Fprintf(file, "\thooks  = [ \"echo \"export EDITOR=vim\" > ~/.bashrc\" ]\n")
+	fmt.Fprintf(file, "\thooks  = [ \"echo 'export EDITOR=vim' >> ~/.bashrc\" ]\n")
 
 	fmt.Println(Green("Created"), "dotfile directory")
 }
