@@ -8,6 +8,10 @@ unset_user() {
     sed -i "s/$USER/%%%/g" "manager.toml"
 }
 
+restore() {
+    sween -o unlink -d "all" >> /dev/null
+}
+
 # Colors
 RED='\033[0;31m'
 GRN='\033[0;32m'
@@ -21,26 +25,24 @@ check_output() {
     else
         echo -e "TEST: ${FUNCNAME[1]} ${RED}FAILED${RES}"
     fi
+
+    restore
 }
 
 without_target() {
     check_output "sween -o link -d without_target | grep 'ERROR:'" "Target is missed"
-    sween -o unlink -d without_target >> /dev/null
 }
 
 without_source() {
     check_output "sween -o link -d without_source | grep 'ERROR:'" "Source is missed"
-    sween -o unlink -d without_source >> /dev/null
 }
 
 full_path() {
     check_output "sween -o link -d full_path | grep 'ERROR:'" ""
-    sween -o unlink -d full_path >> /dev/null
 }
 
 tilda_path() {
     check_output "sween -o link -d tilda_path | grep 'ERROR:'" ""
-    sween -o unlink -d tilda_path >> /dev/null
 }
 
 only_hooks() {
@@ -49,11 +51,19 @@ only_hooks() {
 
 profile() {
     check_output "sween -o link -p main | grep 'ERROR:'" ""
-    sween -o unlink -p main >> /dev/null
+}
+
+multiple_dotfiles() {
+    check_output "sween -o link -d 'tilda_path full_path' | wc -l" "2"
+}
+
+all_dotfiles() {
+    check_output "sween -o link -d ALL | wc -l" "7"
 }
 
 main() {
     set_user
+    restore
 
     without_target
     without_source
@@ -61,6 +71,8 @@ main() {
     tilda_path
     only_hooks
     profile
+    multiple_dotfiles
+    all_dotfiles
 
     unset_user
 }

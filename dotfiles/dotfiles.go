@@ -32,7 +32,9 @@ func (d Dotfile) DotfileOperation(user string, operation OperationType) error {
 	} else if source == "" && target == "" && operation != Unlink {
 		RunHooks(d)
         return nil
-	}
+	} else if source == "" && target == "" && operation == Unlink {
+        return nil
+    }
 
 	if operation != Unlink {
 		defer RunHooks(d)
@@ -44,7 +46,7 @@ func (d Dotfile) DotfileOperation(user string, operation OperationType) error {
 	case Unlink:
 		return os.Remove(target)
 	default:
-		return fmt.Errorf("Unknown operation `%s`", operation)
+		return fmt.Errorf("Unknown operation `%s`\n", operation)
 	}
 }
 

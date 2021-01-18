@@ -19,11 +19,7 @@ func (p Profile) ProfileOperation(user string, operation OperationType, dotfiles
 	for _, dotfile := range p.Dotfiles {
         fmt.Println(Sprintf(White("%sing %s..."), White(operation), Green(dotfile)))
 
-        err := dotfiles[dotfile].DotfileOperation(user, operation)
-
-        if err != nil {
-            return err
-        }
+        dotfiles[dotfile].DotfileOperation(user, operation)
 	}
 
 	return nil
