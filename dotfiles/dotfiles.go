@@ -19,14 +19,19 @@ func (d Dotfile) DotfileOperation(user string, operation OperationType) error {
 	source := resolvePath(d.Source, user, false)
 	target := resolvePath(d.Target, user, true)
 
+    // fmt.Println(source)
+    // fmt.Println(target)
+    // fmt.Println(d.Hooks)
+
 	if source == "" && target == "" && len(d.Hooks) == 0 {
 		return fmt.Errorf("Dotfile is not valid. Source, target and hooks are missed")
-	} else if source == "" && target != "" {
+	} else if source != "" && target == "" {
 		return fmt.Errorf("Dotfile is not valid. Target is missed")
-	} else if target == "" && source != "" {
+	} else if target != "" && source == "" {
 		return fmt.Errorf("Dotfile is not valid. Source is missed")
 	} else if source == "" && target == "" && operation != Unlink {
 		RunHooks(d)
+        return nil
 	}
 
 	if operation != Unlink {
@@ -57,6 +62,10 @@ func RunHooks(dotfile Dotfile) {
 }
 
 func resolvePath(path string, user string, isTarget bool) string {
+    if path == "" {
+        return ""
+    }
+
 	if isTarget {
 		if path == "~" {
 			return fmt.Sprintf("/home/%s", user)
@@ -73,5 +82,9 @@ func resolvePath(path string, user string, isTarget bool) string {
 		return fmt.Sprintf("%s/%s", wd, path)
 	}
 
-	return ""
+	if strings.HasPrefix(path, "/") {
+        return path
+    }
+
+    return ""
 }

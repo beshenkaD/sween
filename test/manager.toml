@@ -1,12 +1,23 @@
-
-user = "beshenka"
+user = "%%%"
 
 [profiles]
 [profiles.main]
-	dotfiles = [ "vim" ]
+	dotfiles = [ "full_path", "tilda_path" ]
 
 [dotfiles]
-[dotfiles.without_target]
-	source = "dotfile"
-[dotfiles.without_source]
-    target = "/tmp/dot"
+    [dotfiles.without_target]
+        source = "dotfile"
+
+    [dotfiles.without_source]
+        target = "/tmp/dot"
+
+    [dotfiles.full_path]
+        source = "dotfile"
+        target = "/tmp/dotfile"
+
+    [dotfiles.tilda_path]
+        source = "dotfile"
+        target = "~/dotfile"
+
+    [dotfiles.only_hook]
+        hooks = [ "echo \"this is HOOK!\"" ]
