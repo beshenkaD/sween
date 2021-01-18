@@ -19,13 +19,6 @@ sween --init dotfiles
 **2. Configuration and usage:**
 Take a look at the [example](example).
 
-# Limitations
-Unfortunately, if you use `doas` or `su -c`, then you need to export the environment variable SUDO_USER if you are going to install files in the '/home/$USER' and in the '/' at the same time.
-**Example**
-```shell script
-env SUDO_USER=$USER su -c 'sween --link --profiles "homeDotfiles rootDotfiles"'
-```
-
 ## License
 All the code in this repository is released under the GPL License. Take a look
 at the [LICENSE](LICENSE) for more info.
