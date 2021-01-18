@@ -1,0 +1,12 @@
+
+user = "beshenka"
+
+[profiles]
+[profiles.main]
+	dotfiles = [ "vim" ]
+
+[dotfiles]
+[dotfiles.without_target]
+	source = "dotfile"
+[dotfiles.without_source]
+    target = "/tmp/dot"

@@ -1,3 +1,5 @@
+user = "beshenka"
+
 # Profiles are convenient for grouping dotfiles
 [profiles]
 
