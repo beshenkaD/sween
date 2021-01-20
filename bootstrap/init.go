@@ -1,9 +1,9 @@
-package init
+package bootstrap
 
 import (
 	"fmt"
 	"os"
-    "os/user"
+	"os/user"
 	"path/filepath"
 )
 
@@ -23,11 +23,11 @@ func InitDotfilesDir(name string) error {
 
 	defer file.Close()
 
-    usr, _ := user.Current()
+	usr, _ := user.Current()
 
 	fmt.Fprintf(file, "# This is example config. For more info see\n")
 	fmt.Fprintf(file, "# https://github.com/beshenkaD/sween/tree/master/example\n\n")
-    fmt.Fprintf(file, "user = \"%s\"\n", usr.Username)
+	fmt.Fprintf(file, "user = \"%s\"\n", usr.Username)
 	fmt.Fprintf(file, "[profiles]\n")
 	fmt.Fprintf(file, "[profiles.main]\n")
 	fmt.Fprintf(file, "\tdotfiles = [ \"vim\" ]\n")
@@ -37,5 +37,5 @@ func InitDotfilesDir(name string) error {
 	fmt.Fprintf(file, "\ttarget = \"~/.vimrc\"\n")
 	fmt.Fprintf(file, "\thooks  = [ \"echo 'export EDITOR=vim' >> ~/.bashrc\" ]\n")
 
-    return nil
+	return nil
 }

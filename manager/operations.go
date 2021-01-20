@@ -1,4 +1,4 @@
-package dotfiles
+package manager
 
 import (
     "strings"
@@ -13,7 +13,7 @@ const (
 )
 
 func (d OperationType) String() string {
-	return [...]string{"Link", "Unlink"}[d]
+	return [...]string{"Link", "Unlink", "Unknown"}[d]
 }
 
 func NewOperationType(rawType string) OperationType {

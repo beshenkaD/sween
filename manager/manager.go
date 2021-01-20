@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	. "sween/dotfiles"
-	. "sween/profiles"
 
 	"github.com/BurntSushi/toml"
 	. "github.com/logrusorgru/aurora"
@@ -28,30 +26,23 @@ func NewManager() Manager {
 	return manager
 }
 
-func (m Manager) DotfilesOperation(dotfiles string, operation OperationType) {
-	if dotfiles == "" {
-		return
-	}
+func (m *Manager) Operation(dotfiles string, profiles string, operation OperationType) {
+    if dotfiles != "" {
+        m.dotfilesOperation(dotfiles, operation)
+    }
 
-	dotfilesOperation(dotfiles, operation, m)
+    if profiles != "" {
+        m.profilesOperation(profiles, operation)
+    }
 }
 
-func (m Manager) ProfilesOperation(profiles string, operation OperationType) {
-	if profiles == "" {
-		return
-	}
-
-	profilesOperation(profiles, operation, m)
-}
-
-// Helpers
 func printError(err error) {
 	if err != nil {
 		fmt.Println(Sprintf("%s %s", Red("ERROR:"), err))
 	}
 }
 
-func dotfilesOperation(dotfilesRaw string, operation OperationType, m Manager) {
+func (m *Manager) dotfilesOperation(dotfilesRaw string, operation OperationType) {
 	dotfiles := strings.Split(dotfilesRaw, " ")
 
 	if strings.ToLower(dotfiles[0]) == "all" {
@@ -71,7 +62,7 @@ func dotfilesOperation(dotfilesRaw string, operation OperationType, m Manager) {
 	}
 }
 
-func profilesOperation(profilesRaw string, operation OperationType, m Manager) {
+func (m *Manager) profilesOperation(profilesRaw string, operation OperationType) {
 	profiles := strings.Split(profilesRaw, " ")
 
 	for _, profile := range profiles {

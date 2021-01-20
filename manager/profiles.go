@@ -1,9 +1,8 @@
-package profiles
+package manager
 
 import (
 	"fmt"
     . "github.com/logrusorgru/aurora"
-	. "sween/dotfiles"
 )
 
 type Profile struct {

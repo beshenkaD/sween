@@ -2,22 +2,21 @@ package main
 
 import (
 	"fmt"
-	. "github.com/logrusorgru/aurora"
+	"github.com/logrusorgru/aurora"
 	"github.com/pborman/getopt/v2"
-	. "sween/dotfiles"
-	. "sween/init"
-	. "sween/manager"
+	"sween/bootstrap"
+	"sween/manager"
 )
 
-const VERSION = "0.0.4 dev"
+const VERSION = "0.0.5 dev"
 
 var (
 	isHelp       bool
 	isVersion    bool
 	initDirName  string
 	rawOperation string
-	profiles     string
-	dotfiles     string
+	profilesRaw  string
+	dotfilesRaw  string
 )
 
 func main() {
@@ -28,18 +27,17 @@ func main() {
 		getopt.Usage()
 		return
 	} else if isVersion {
-		fmt.Println(Green("Sween"), VERSION)
+		fmt.Println(aurora.Green("Sween"), VERSION)
 		return
 	} else if initDirName != "" {
-		InitDotfilesDir(initDirName)
+		bootstrap.InitDotfilesDir(initDirName)
 		return
 	}
 
-	manager := NewManager()
-	operation := NewOperationType(rawOperation)
+    operation := manager.NewOperationType(rawOperation)
+	manager := manager.NewManager()
 
-	manager.DotfilesOperation(dotfiles, operation)
-	manager.ProfilesOperation(profiles, operation)
+	manager.Operation(dotfilesRaw, profilesRaw, operation)
 }
 
 func initArgs() {
@@ -47,6 +45,6 @@ func initArgs() {
 	getopt.FlagLong(&isVersion, "version", 'v', "Display version")
 	getopt.FlagLong(&initDirName, "init", 'i', "Initialize new dotfile directory")
 	getopt.FlagLong(&rawOperation, "operation", 'o', "Operation performed on dotfiles [link] [unlink]")
-	getopt.FlagLong(&profiles, "profiles", 'p', "Use profiles")
-	getopt.FlagLong(&dotfiles, "dotfiles", 'd', "Use dotfiles")
+	getopt.FlagLong(&profilesRaw, "profiles", 'p', "Use profiles")
+	getopt.FlagLong(&dotfilesRaw, "dotfiles", 'd', "Use dotfiles")
 }
