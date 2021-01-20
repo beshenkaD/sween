@@ -8,7 +8,7 @@ import (
 	"sween/manager"
 )
 
-const VERSION = "0.0.5 dev"
+const VERSION = "0.0.5-dev"
 
 var (
 	isHelp       bool
@@ -30,7 +30,11 @@ func main() {
 		fmt.Println(aurora.Green("Sween"), VERSION)
 		return
 	} else if initDirName != "" {
-		bootstrap.InitDotfilesDir(initDirName)
+        err := bootstrap.InitDotfilesDir(initDirName)
+
+        if err != nil {
+        }
+
 		return
 	}
 
