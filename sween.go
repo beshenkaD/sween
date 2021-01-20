@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/logrusorgru/aurora"
 	"github.com/pborman/getopt/v2"
-	"sween/bootstrap"
-	"sween/manager"
+	"github.com/beshenkaD/sween/bootstrap"
+	"github.com/beshenkaD/sween/manager"
 )
 
 const VERSION = "0.0.5-dev"
