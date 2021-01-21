@@ -46,7 +46,7 @@ func main() {
 
 	if convertRaw != "" {
 		m.Convert(convertRaw, manager.User)
-        return
+		return
 	}
 
 	manager.Operation(dotfilesRaw, profilesRaw, operation)

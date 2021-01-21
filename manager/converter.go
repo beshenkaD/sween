@@ -116,9 +116,9 @@ func Convert(path string, user string) {
 			panic(err)
 		}
 
-        if err := removeFromManager(str); err != nil {
-            panic(err)
-        }
+		if err := removeFromManager(str); err != nil {
+			panic(err)
+		}
 		utils.PrintError(err)
 		os.Exit(1)
 	}
