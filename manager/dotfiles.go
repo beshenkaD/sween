@@ -32,14 +32,14 @@ func (d Dotfile) Operation(user string, operation OperationType) error {
 	} else if target != "" && source == "" {
 		return errors.New("dotfile is not valid. Source is missed")
 	} else if source == "" && target == "" && operation != Unlink {
-		RunHooks(d)
+		RunHooks(d.Hooks)
 		return nil
 	} else if source == "" && target == "" && operation == Unlink {
 		return nil
 	}
 
 	if operation != Unlink {
-		defer RunHooks(d)
+		defer RunHooks(d.Hooks)
 	}
 
 	switch operation {
@@ -52,8 +52,8 @@ func (d Dotfile) Operation(user string, operation OperationType) error {
 	}
 }
 
-func RunHooks(dotfile Dotfile) {
-	for _, hook := range dotfile.Hooks {
+func RunHooks(hooks []string) {
+	for _, hook := range hooks {
 		out, err := exec.Command("sh", "-c", hook).Output()
 
 		if err != nil {
