@@ -1,7 +1,7 @@
 package main
 
 import (
-    "fmt"
+	"fmt"
 	"github.com/beshenkaD/sween/bootstrap"
 	m "github.com/beshenkaD/sween/manager"
 	"github.com/logrusorgru/aurora"
@@ -14,7 +14,7 @@ var (
 	isHelp       bool
 	isVersion    bool
 	initDirName  string
-	rawOperation string
+	OperationRaw string
 	profilesRaw  string
 	dotfilesRaw  string
 )
@@ -38,9 +38,9 @@ func main() {
 		return
 	}
 
-    operation := m.NewOperationType(rawOperation)
+	operation := m.NewOperationType(OperationRaw)
 	manager := m.NewManager()
-    // m.Convert("/home/beshenka/.config/cmus", manager.User)
+	// m.Convert("/home/beshenka/.config/cmus", manager.User)
 
 	manager.Operation(dotfilesRaw, profilesRaw, operation)
 }
@@ -49,7 +49,7 @@ func initArgs() {
 	getopt.FlagLong(&isHelp, "help", '?', "Display help")
 	getopt.FlagLong(&isVersion, "version", 'v', "Display version")
 	getopt.FlagLong(&initDirName, "init", 'i', "Initialize new dotfile directory")
-	getopt.FlagLong(&rawOperation, "operation", 'o', "Operation performed on dotfiles [link] [unlink]")
+	getopt.FlagLong(&OperationRaw, "operation", 'o', "Operation performed on dotfiles [link] [unlink]")
 	getopt.FlagLong(&profilesRaw, "profiles", 'p', "Use profiles")
 	getopt.FlagLong(&dotfilesRaw, "dotfiles", 'd', "Use dotfiles")
 }
