@@ -9,7 +9,7 @@ import (
 	"github.com/pborman/getopt/v2"
 )
 
-const VERSION = "0.1.5-dev"
+const VERSION = "0.1.6-dev"
 
 var (
 	isHelp       bool
