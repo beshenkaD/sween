@@ -25,17 +25,23 @@ func InitDotfilesDir(name string) error {
 
 	usr, _ := user.Current()
 
-	fmt.Fprintf(file, "# This is example config. For more info see\n")
-	fmt.Fprintf(file, "# https://github.com/beshenkaD/sween/tree/master/example\n\n")
-	fmt.Fprintf(file, "user = \"%s\"\n", usr.Username)
-	fmt.Fprintf(file, "[profiles]\n")
-	fmt.Fprintf(file, "[profiles.main]\n")
-	fmt.Fprintf(file, "\tdotfiles = [ \"vim\" ]\n")
-	fmt.Fprintf(file, "[dotfiles]\n")
-	fmt.Fprintf(file, "[dotfiles.vim]\n")
-	fmt.Fprintf(file, "\tsource = \"vim\"\n")
-	fmt.Fprintf(file, "\ttarget = \"~/.vimrc\"\n")
-	fmt.Fprintf(file, "\thooks  = [ \"echo 'export EDITOR=vim' >> ~/.bashrc\" ]\n")
+	config :=
+`# This is example config. For more info see
+# https://github.com/beshenkaD/sween/tree/master/example
+user = "%s"
+
+[profiles]
+[profiles.main]
+    dotfiles = [ "vim" ]
+
+[dotfiles]
+[dotfiles.vim]
+    source = "vim"
+    target = "~/.vimrc"
+    hooks  = [ "echo 'export EDITOR=vim' >> ~/.bashrc" ]
+`
+
+	fmt.Fprintf(file, config, usr.Username)
 
 	return nil
 }

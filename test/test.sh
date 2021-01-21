@@ -61,6 +61,31 @@ all_dotfiles() {
     check_output "sween -o link -d ALL | wc -l" "7"
 }
 
+bootstrap() {
+    read -r -d '' text << EOM
+# This is example config. For more info see
+# https://github.com/beshenkaD/sween/tree/master/example
+user = "beshenka"
+
+[profiles]
+[profiles.main]
+    dotfiles = [ "vim" ]
+
+[dotfiles]
+[dotfiles.vim]
+    source = "vim"
+    target = "~/.vimrc"
+    hooks  = [ "echo 'export EDITOR=vim' >> ~/.bashrc" ]
+
+EOM
+
+    sween -i testInitDir 
+    check_output "cat testInitDir/manager.toml" $text
+
+    rm -rf testInitDir
+
+}
+
 main() {
     set_user
     restore
@@ -73,6 +98,7 @@ main() {
     profile
     multiple_dotfiles
     all_dotfiles
+    bootstrap
 
     unset_user
 }
