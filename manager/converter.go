@@ -76,7 +76,7 @@ func Convert(path string, user string) {
 		Hooks:  nil,
 	}
 
-	err = newDotfile.DotfileOperation(user, Link)
+	err = newDotfile.Operation(user, Link)
 
 	if err != nil {
 		panic(err)
