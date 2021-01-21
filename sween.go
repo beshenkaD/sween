@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/beshenkaD/sween/bootstrap"
 	m "github.com/beshenkaD/sween/manager"
+	"github.com/beshenkaD/sween/utils"
 	"github.com/logrusorgru/aurora"
 	"github.com/pborman/getopt/v2"
 )
@@ -17,6 +18,7 @@ var (
 	OperationRaw string
 	profilesRaw  string
 	dotfilesRaw  string
+	convertRaw   string
 )
 
 func main() {
@@ -33,6 +35,7 @@ func main() {
 		err := bootstrap.InitDotfilesDir(initDirName)
 
 		if err != nil {
+			utils.PrintError(err)
 		}
 
 		return
@@ -40,7 +43,11 @@ func main() {
 
 	operation := m.NewOperationType(OperationRaw)
 	manager := m.NewManager()
-	// m.Convert("/home/beshenka/.config/cmus", manager.User)
+
+	if convertRaw != "" {
+		m.Convert(convertRaw, manager.User)
+        return
+	}
 
 	manager.Operation(dotfilesRaw, profilesRaw, operation)
 }
@@ -52,4 +59,5 @@ func initArgs() {
 	getopt.FlagLong(&OperationRaw, "operation", 'o', "Operation performed on dotfiles [link] [unlink]")
 	getopt.FlagLong(&profilesRaw, "profiles", 'p', "Use profiles")
 	getopt.FlagLong(&dotfilesRaw, "dotfiles", 'd', "Use dotfiles")
+	getopt.FlagLong(&convertRaw, "convert", 'c', "Convert a file or dir to sween compatable dotfile")
 }

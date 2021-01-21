@@ -83,7 +83,23 @@ EOM
     check_output "cat testInitDir/manager.toml" $text
 
     rm -rf testInitDir
+}
 
+convert() {
+    tmp="TMPFILEFORTEST"
+
+    touch /tmp/$tmp >> /dev/null
+    sween -c /tmp/$tmp >> /dev/null
+
+    r=$(grep -Riwl 'manager.toml' -e 'dotfiles.TMPFILEFORTEST')
+    check_output "echo $r" "manager.toml"
+
+    rm -rf ./TMPFILEFORTEST
+
+    sed -i '$ d' manager.toml
+    sed -i '$ d' manager.toml
+    sed -i '$ d' manager.toml
+    sed -i '$ d' manager.toml
 }
 
 main() {
@@ -99,6 +115,7 @@ main() {
     multiple_dotfiles
     all_dotfiles
     bootstrap
+    convert
 
     unset_user
 }
