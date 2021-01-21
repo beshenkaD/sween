@@ -1,13 +1,13 @@
 package manager
 
 import (
+	"errors"
 	"fmt"
-    "errors"
-    . "github.com/logrusorgru/aurora"
+	. "github.com/logrusorgru/aurora"
 )
 
 type Profile struct {
-    Dotfiles []string
+	Dotfiles []string
 }
 type Profiles map[string]Profile
 
@@ -17,9 +17,9 @@ func (p Profile) ProfileOperation(user string, operation OperationType, dotfiles
 	}
 
 	for _, dotfile := range p.Dotfiles {
-        fmt.Println(Sprintf(White("%sing %s..."), White(operation), Green(dotfile)))
+		fmt.Println(Sprintf(White("%sing %s..."), White(operation), Green(dotfile)))
 
-        dotfiles[dotfile].DotfileOperation(user, operation)
+		dotfiles[dotfile].DotfileOperation(user, operation)
 	}
 
 	return nil

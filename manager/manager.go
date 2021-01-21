@@ -27,13 +27,13 @@ func NewManager() Manager {
 }
 
 func (m *Manager) Operation(dotfiles string, profiles string, operation OperationType) {
-    if dotfiles != "" {
-        m.dotfilesOperation(dotfiles, operation)
-    }
+	if dotfiles != "" {
+		m.dotfilesOperation(dotfiles, operation)
+	}
 
-    if profiles != "" {
-        m.profilesOperation(profiles, operation)
-    }
+	if profiles != "" {
+		m.profilesOperation(profiles, operation)
+	}
 }
 
 func printError(err error) {
@@ -49,15 +49,15 @@ func (m *Manager) dotfilesOperation(dotfilesRaw string, operation OperationType)
 		for dotfileName, dotfile := range m.Dotfiles {
 			fmt.Println(Sprintf(White("%sing %s..."), White(operation), Green(dotfileName)))
 
-            err := dotfile.DotfileOperation(m.User, operation)
-            printError(err)
+			err := dotfile.DotfileOperation(m.User, operation)
+			printError(err)
 		}
 	} else {
 		for _, dotfile := range dotfiles {
 			fmt.Println(Sprintf(White("%sing %s..."), White(operation), Green(dotfile)))
 
-            err := m.Dotfiles[dotfile].DotfileOperation(m.User, operation)
-            printError(err)
+			err := m.Dotfiles[dotfile].DotfileOperation(m.User, operation)
+			printError(err)
 		}
 	}
 }
@@ -66,7 +66,7 @@ func (m *Manager) profilesOperation(profilesRaw string, operation OperationType)
 	profiles := strings.Split(profilesRaw, " ")
 
 	for _, profile := range profiles {
-        err := m.Profiles[profile].ProfileOperation(m.User, operation, m.Dotfiles)
-        printError(err)
+		err := m.Profiles[profile].ProfileOperation(m.User, operation, m.Dotfiles)
+		printError(err)
 	}
 }

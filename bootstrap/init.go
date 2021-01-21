@@ -26,7 +26,7 @@ func InitDotfilesDir(name string) error {
 	usr, _ := user.Current()
 
 	config :=
-`# This is example config. For more info see
+		`# This is example config. For more info see
 # https://github.com/beshenkaD/sween/tree/master/example
 user = "%s"
 

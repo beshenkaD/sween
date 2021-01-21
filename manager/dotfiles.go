@@ -1,11 +1,11 @@
 package manager
 
 import (
+	"errors"
 	"fmt"
-    "errors"
-    "path/filepath"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 )
 
@@ -21,9 +21,9 @@ func (d Dotfile) DotfileOperation(user string, operation OperationType) error {
 	source := resolvePath(d.Source, user, false)
 	target := resolvePath(d.Target, user, true)
 
-    // fmt.Println(source)
-    // fmt.Println(target)
-    // fmt.Println(d.Hooks)
+	// fmt.Println(source)
+	// fmt.Println(target)
+	// fmt.Println(d.Hooks)
 
 	if source == "" && target == "" && len(d.Hooks) == 0 {
 		return errors.New("dotfile is not valid. Source, target and hooks are missed")
@@ -33,10 +33,10 @@ func (d Dotfile) DotfileOperation(user string, operation OperationType) error {
 		return errors.New("dotfile is not valid. Source is missed")
 	} else if source == "" && target == "" && operation != Unlink {
 		RunHooks(d)
-        return nil
+		return nil
 	} else if source == "" && target == "" && operation == Unlink {
-        return nil
-    }
+		return nil
+	}
 
 	if operation != Unlink {
 		defer RunHooks(d)
@@ -66,13 +66,13 @@ func RunHooks(dotfile Dotfile) {
 }
 
 func resolvePath(path string, user string, isTarget bool) string {
-    if path == "" {
-        return ""
-    }
+	if path == "" {
+		return ""
+	}
 
 	if isTarget {
 		if path == "~" {
-            return filepath.Join("/home", user)
+			return filepath.Join("/home", user)
 		} else if strings.HasPrefix(path, "~/") {
 			return filepath.Join("/home", user, path[2:])
 		}
@@ -83,12 +83,12 @@ func resolvePath(path string, user string, isTarget bool) string {
 			panic(err)
 		}
 
-        return filepath.Join(wd, path)
+		return filepath.Join(wd, path)
 	}
 
 	if strings.HasPrefix(path, "/") {
-        return path
-    }
+		return path
+	}
 
-    return ""
+	return ""
 }
