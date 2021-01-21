@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+    "github.com/beshenkaD/sween/utils"
 )
 
 // copy target to wd
@@ -79,7 +80,7 @@ func Convert(path string, user string) {
 	err = newDotfile.Operation(user, Link)
 
 	if err != nil {
-		panic(err)
+        utils.PrintError(err)
 	}
 
 	os.Exit(0)

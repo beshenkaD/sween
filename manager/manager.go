@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/BurntSushi/toml"
+	"github.com/beshenkaD/sween/utils"
 	. "github.com/logrusorgru/aurora"
 )
 
@@ -36,12 +37,6 @@ func (m *Manager) Operation(dotfiles string, profiles string, operation Operatio
 	}
 }
 
-func printError(err error) {
-	if err != nil {
-		fmt.Println(Sprintf("%s %s", Red("ERROR:"), err))
-	}
-}
-
 func (m *Manager) dotfilesOperation(dotfilesRaw string, operation OperationType) {
 	dotfiles := strings.Split(dotfilesRaw, " ")
 
@@ -50,14 +45,14 @@ func (m *Manager) dotfilesOperation(dotfilesRaw string, operation OperationType)
 			fmt.Println(Sprintf(White("%sing %s..."), White(operation), Green(dotfileName)))
 
 			err := dotfile.Operation(m.User, operation)
-			printError(err)
+			utils.PrintError(err)
 		}
 	} else {
 		for _, dotfile := range dotfiles {
 			fmt.Println(Sprintf(White("%sing %s..."), White(operation), Green(dotfile)))
 
 			err := m.Dotfiles[dotfile].Operation(m.User, operation)
-			printError(err)
+			utils.PrintError(err)
 		}
 	}
 }
@@ -67,6 +62,6 @@ func (m *Manager) profilesOperation(profilesRaw string, operation OperationType)
 
 	for _, profile := range profiles {
 		err := m.Profiles[profile].ProfileOperation(m.User, operation, m.Dotfiles)
-		printError(err)
+		utils.PrintError(err)
 	}
 }
