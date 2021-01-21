@@ -5,7 +5,7 @@ import (
 	"github.com/logrusorgru/aurora"
 	"github.com/pborman/getopt/v2"
 	"sween/bootstrap"
-	"sween/manager"
+	m "sween/manager"
 )
 
 const VERSION = "0.0.5 dev"
@@ -34,8 +34,9 @@ func main() {
 		return
 	}
 
-    operation := manager.NewOperationType(rawOperation)
-	manager := manager.NewManager()
+    operation := m.NewOperationType(rawOperation)
+	manager := m.NewManager()
+    // m.Convert("/home/beshenka/.config/cmus", manager.User)
 
 	manager.Operation(dotfilesRaw, profilesRaw, operation)
 }

@@ -21,3 +21,7 @@ user = "%%%"
 
     [dotfiles.only_hook]
         hooks = [ "echo \"this is HOOK!\"" ]
+
+[dotfiles.cmus]
+    source = "cmus"
+    target = "~/.config/cmus"
