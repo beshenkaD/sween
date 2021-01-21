@@ -2,6 +2,7 @@ package manager
 
 import (
 	"fmt"
+    "path/filepath"
 	"os"
 	"os/exec"
 	"strings"
@@ -70,9 +71,9 @@ func resolvePath(path string, user string, isTarget bool) string {
 
 	if isTarget {
 		if path == "~" {
-			return fmt.Sprintf("/home/%s", user)
+            return filepath.Join("/home", user)
 		} else if strings.HasPrefix(path, "~/") {
-			return fmt.Sprintf("/home/%s/%s", user, path[2:])
+			return filepath.Join("/home", user, path[2:])
 		}
 	} else {
 		wd, err := os.Getwd()
@@ -81,7 +82,7 @@ func resolvePath(path string, user string, isTarget bool) string {
 			panic(err)
 		}
 
-		return fmt.Sprintf("%s/%s", wd, path)
+        return filepath.Join(wd, path)
 	}
 
 	if strings.HasPrefix(path, "/") {

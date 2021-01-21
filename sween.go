@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/logrusorgru/aurora"
-	"github.com/pborman/getopt/v2"
 	"github.com/beshenkaD/sween/bootstrap"
 	"github.com/beshenkaD/sween/manager"
+	"github.com/logrusorgru/aurora"
+	"github.com/pborman/getopt/v2"
 )
 
 const VERSION = "0.0.5-dev"
@@ -30,15 +30,15 @@ func main() {
 		fmt.Println(aurora.Green("Sween"), VERSION)
 		return
 	} else if initDirName != "" {
-        err := bootstrap.InitDotfilesDir(initDirName)
+		err := bootstrap.InitDotfilesDir(initDirName)
 
-        if err != nil {
-        }
+		if err != nil {
+		}
 
 		return
 	}
 
-    operation := manager.NewOperationType(rawOperation)
+	operation := manager.NewOperationType(rawOperation)
 	manager := manager.NewManager()
 
 	manager.Operation(dotfilesRaw, profilesRaw, operation)
