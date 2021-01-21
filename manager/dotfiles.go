@@ -2,6 +2,7 @@ package manager
 
 import (
 	"fmt"
+    "errors"
     "path/filepath"
 	"os"
 	"os/exec"
@@ -25,11 +26,11 @@ func (d Dotfile) DotfileOperation(user string, operation OperationType) error {
     // fmt.Println(d.Hooks)
 
 	if source == "" && target == "" && len(d.Hooks) == 0 {
-		return fmt.Errorf("Dotfile is not valid. Source, target and hooks are missed")
+		return errors.New("dotfile is not valid. Source, target and hooks are missed")
 	} else if source != "" && target == "" {
-		return fmt.Errorf("Dotfile is not valid. Target is missed")
+		return errors.New("dotfile is not valid. Target is missed")
 	} else if target != "" && source == "" {
-		return fmt.Errorf("Dotfile is not valid. Source is missed")
+		return errors.New("dotfile is not valid. Source is missed")
 	} else if source == "" && target == "" && operation != Unlink {
 		RunHooks(d)
         return nil
@@ -47,7 +48,7 @@ func (d Dotfile) DotfileOperation(user string, operation OperationType) error {
 	case Unlink:
 		return os.Remove(target)
 	default:
-		return fmt.Errorf("Unknown operation `%s`\n", operation)
+		return fmt.Errorf("unknown operation `%s`\n", operation)
 	}
 }
 

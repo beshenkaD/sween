@@ -2,6 +2,7 @@ package manager
 
 import (
 	"fmt"
+    "errors"
     . "github.com/logrusorgru/aurora"
 )
 
@@ -12,7 +13,7 @@ type Profiles map[string]Profile
 
 func (p Profile) ProfileOperation(user string, operation OperationType, dotfiles Dotfiles) error {
 	if len(p.Dotfiles) == 0 {
-		return fmt.Errorf("Profile does not exist")
+		return errors.New("profile does not exist")
 	}
 
 	for _, dotfile := range p.Dotfiles {
