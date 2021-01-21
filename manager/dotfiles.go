@@ -17,7 +17,7 @@ type Dotfile struct {
 
 type Dotfiles map[string]Dotfile
 
-func (d Dotfile) DotfileOperation(user string, operation OperationType) error {
+func (d Dotfile) Operation(user string, operation OperationType) error {
 	source := resolvePath(d.Source, user, false)
 	target := resolvePath(d.Target, user, true)
 

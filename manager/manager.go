@@ -49,14 +49,14 @@ func (m *Manager) dotfilesOperation(dotfilesRaw string, operation OperationType)
 		for dotfileName, dotfile := range m.Dotfiles {
 			fmt.Println(Sprintf(White("%sing %s..."), White(operation), Green(dotfileName)))
 
-			err := dotfile.DotfileOperation(m.User, operation)
+			err := dotfile.Operation(m.User, operation)
 			printError(err)
 		}
 	} else {
 		for _, dotfile := range dotfiles {
 			fmt.Println(Sprintf(White("%sing %s..."), White(operation), Green(dotfile)))
 
-			err := m.Dotfiles[dotfile].DotfileOperation(m.User, operation)
+			err := m.Dotfiles[dotfile].Operation(m.User, operation)
 			printError(err)
 		}
 	}
