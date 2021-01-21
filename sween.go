@@ -8,7 +8,7 @@ import (
 	m "sween/manager"
 )
 
-const VERSION = "0.0.5 dev"
+const VERSION = "0.1.5 dev"
 
 var (
 	isHelp       bool
