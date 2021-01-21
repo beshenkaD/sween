@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
+    "fmt"
 	"github.com/beshenkaD/sween/bootstrap"
-	"github.com/beshenkaD/sween/manager"
+	m "github.com/beshenkaD/sween/manager"
 	"github.com/logrusorgru/aurora"
 	"github.com/pborman/getopt/v2"
 )
 
-const VERSION = "0.0.5-dev"
+const VERSION = "0.1.5 dev"
 
 var (
 	isHelp       bool
@@ -38,8 +38,9 @@ func main() {
 		return
 	}
 
-	operation := manager.NewOperationType(rawOperation)
-	manager := manager.NewManager()
+    operation := m.NewOperationType(rawOperation)
+	manager := m.NewManager()
+    // m.Convert("/home/beshenka/.config/cmus", manager.User)
 
 	manager.Operation(dotfilesRaw, profilesRaw, operation)
 }
