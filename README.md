@@ -19,6 +19,9 @@ sween --init dotfiles
 **2. Configuration and usage:**
 Take a look at the [example](example).
 
+# TODO
+- [x] More cli syntax and type detection Example: ```sween link dot/profile```
+
 ## License
 All the code in this repository is released under the GPL License. Take a look
 at the [LICENSE](LICENSE) for more info.
