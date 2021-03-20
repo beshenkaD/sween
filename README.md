@@ -20,7 +20,7 @@ sween --init dotfiles
 Take a look at the [example](example).
 
 # TODO
-- [x] More cli syntax and type detection Example: ```sween link dot/profile```
+- [ ] More common cli syntax and type detection Example: ```sween link dot/profile```
 
 ## License
 All the code in this repository is released under the GPL License. Take a look
