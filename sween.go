@@ -9,6 +9,7 @@ import (
 	"github.com/pborman/getopt/v2"
 )
 
+// TODO: remove orphans
 const VERSION = "0.1.6-dev"
 
 var (

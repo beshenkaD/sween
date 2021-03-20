@@ -27,14 +27,17 @@ func createDotfile(path string, user string) Dotfile {
 	source = filepath.Base(path)
 	target = path
 
+	if strings.HasPrefix(source, ".") {
+		source = source[1:]
+	}
 	if ext := filepath.Ext(path); ext != "" {
-		source = source[0 : len(source)-len(ext)]
+		source = strings.Replace(source, ext, "", 1)
 	}
 	if strings.HasSuffix(path, "rc") {
-		source = strings.ReplaceAll(source, "rc", "")
+		source = strings.Replace(source, "rc", "", 1)
 	}
 	if strings.HasPrefix(path, hd) {
-		target = strings.ReplaceAll(target, hd, "~")
+		target = strings.Replace(target, hd, "~", 1)
 	}
 
 	newDotfile := Dotfile{
